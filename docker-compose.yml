@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+  # Local- backend
+  # ****************************************
+  local:
+    container_name: Local
+    build:
+      context: ./local
+    volumes:
+      - ./local:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 4000:4000
+    environment: 
+      - NODE_ENV=development
+    command: npm run start:dev
+    networks:
+      - nestjs-simultaneous-db-test
+    depends_on:
+      - mongodb
+
+  #mongodb
+  # ****************************************
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ../mongo-data/:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    restart:  always
+    networks:
+      - nestjs-simultaneous-db-test
+networks:
+  nestjs-simultaneous-db-test: 
+
+
+  
+  
+    
+
+
+
+
