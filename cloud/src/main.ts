@@ -9,7 +9,9 @@ async function bootstrap() {
   app.use(json({limit:'50mb'}));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.enableCors();
+
   const PORT = process.env.PORT || 5000;
+  
   await app.listen(PORT, ()=> logger.log(`Cloud Backend is listening on port ${PORT}`));
 }
 bootstrap();
