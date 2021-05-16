@@ -5,7 +5,7 @@ import { User, UserSchema } from "./schema/user.schema";
 
 seeder({
     imports:[
-        MongooseModule.forRoot(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.gdphj.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`),
+        MongooseModule.forRoot(`${process.env.MONGO_URI}`),
         MongooseModule.forFeature([{
             name: User.name,
             schema: UserSchema

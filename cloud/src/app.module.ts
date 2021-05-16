@@ -9,7 +9,7 @@ import {User, UserSchema} from './schema/user.schema';
   imports: [
     ConfigModule.forRoot({isGlobal:true}),
     MongooseModule.forRoot(
-      `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.gdphj.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`,
+      `${process.env.MONGO_URI}`,
       {
         useNewUrlParser: true,
         useFindAndModify: true,
