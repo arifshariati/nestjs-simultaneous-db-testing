@@ -12,14 +12,32 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 4000:4000
-    environment: 
-      - NODE_ENV=development
+    env_file: 
+      - ./local/local.env
     command: npm run start:dev
     networks:
       - nestjs-simultaneous-db-test
     depends_on:
       - mongodb
-
+      - cloud
+# Cloud- backend
+  # ****************************************
+  cloud:
+    container_name: Cloud
+    build:
+      context: ./cloud
+    volumes:
+      - ./cloud:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5000:5000
+    env_file:
+      - ./cloud/cloud.env
+    command: npm run start:dev
+    networks:
+      - nestjs-simultaneous-db-test
+    depends_on:
+      - mongodb
   #mongodb
   # ****************************************
   mongodb:

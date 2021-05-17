@@ -7,7 +7,6 @@ import { User } from './schema/user.schema';
 
 
 const logger = new Logger('Local-Cron');
-const endpoint = 'http://127.0.0.1:5000';
 @Injectable()
 export class AppService {
   httpService: any;
@@ -23,7 +22,7 @@ export class AppService {
   }
 
   private async synchDB(){
-    let users = await this.userModel.find({"synched":false}).limit(1);
+    const users = await this.userModel.find({"synched":false}).limit(100);
     
 
     if(users.length > 0){
@@ -34,7 +33,7 @@ export class AppService {
         };
         try{
             
-          Axios.post(`${endpoint}/user/single`, postData)
+          Axios.post(`${process.env.CLOUD_URI}/user/single`, postData)
           .then(response => {
             if(Object.keys(response.data)){
               let newInstance = new this.userModel(user);
