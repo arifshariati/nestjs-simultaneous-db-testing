@@ -76,7 +76,7 @@ networks:
 
 ```
 
-## Robus API Access and mongoDB execution
+## Robust API Access and mongoDB execution
 The aim of this code block is to synch local mongoDB with external data source where number of records are > 100 K. Number of records that Axios can make healthy request and response per minute can differ, however, 100 records per minute seems reasonable powered by cronJob. You can test out various data limits by playing with below code section in project.
 
 ```
